@@ -11,6 +11,17 @@ return <h2>{props.title}</h2>
 //const Hello=(props)=><h2>{props.title}</h2>
 
 //TODOS LOS COMPONENTES QUE HAGAMOS EN REACT TIENEN QUE ACTUAR COMO FUNCIONES PURAS Y NO MODIFICAR SUS PROPIEDADES
+
+class Title extends Component{
+  render(){ //renderiza una etiqueta h1
+    return <h1>{this.props.text}</h1>
+  }
+}
+//Valor por defecto para las props cuando no se le envía datos
+Title.defaultProps={
+  text:'Titulo por defecto' //Se asignan todas las props que queremos tengan un valor por defecto
+}
+
 //Definiendo nuestro componente como una clase
 class Hello extends Component{
   render(){ //método en el que se tiene que devolver el elemento que queremos renderizar
@@ -33,7 +44,9 @@ class Text extends Component{
     //El método Render siempre debe devolver un elemento
     /**const textoSegunBool=this.props.boolean ? 'Es Cierto!':'Falso'**/
     
-    this.props.title=<h3>Otra cosa</h3> //No se puede modificar el valor de una prop
+    //this.props.title=<h3>Otra cosa</h3> //No se puede modificar el valor de una prop, marca error
+    //TypeError: Assignment to read-only properties is not allowed in strict mode
+
     //const textoSegunBool = isActivated ? 'On' : 'Off'
     //const mappedNumbers = this.props.arrayOfNumbers.map(n => n * 2 )
     const mappedNumbers = arrayOfNumbers.map(multiply)
@@ -66,6 +79,7 @@ function App() {
           text='Texto en string'  //Strings
           title= {<h1>Este es el titulo</h1>}//Elementos de React
         />
+        <Title text="Este es otro mensaje"/>
         <a
           className="App-link"
           href="https://reactjs.org"
