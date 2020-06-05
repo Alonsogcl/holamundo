@@ -18,15 +18,37 @@ class Hello extends Component{
   }
 }
 
+class Text extends Component{
+  render(){ //El método Render siempre debe devolver un elemento
+    /**const textoSegunBool=this.props.boolean ? 'Es Cierto!':'Falso'**/
+    const textoSegunBool = this.props.isActivated ? 'On' : 'Off'
+    const mappedNumbers = this.props.arrayOfNumbers.map( n => n * 2 )
+    
+  return(
+    <div>
+      <p>{mappedNumbers.join(', ')}</p> 
+      <p>{this.props.objectWithInfo.key}</p>
+    </div>
+  )
+  }
+}
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Hello title='Hello from props'/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        {/*<Text number={2} text='Texto en string' boolean/>//Cuando indicamos el uso de una prop y no especificamos su valor entonces por default será true*/
+        /*Esta forma de utilizar las props de tipo boleano para pasar directamente true
+        es muy útil a la hora de usarlo para activar ciertas funcionalidades */}
+        <Text 
+          arrayOfNumbers={[2,3,10]}
+          objectWithInfo={{key:'First Value', key2: 'otherValue'}}
+          isActivated
+          number={2} 
+          text='Texto en string' 
+        />
         <a
           className="App-link"
           href="https://reactjs.org"
