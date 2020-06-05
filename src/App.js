@@ -12,9 +12,33 @@ return <h2>{props.title}</h2>
 
 //TODOS LOS COMPONENTES QUE HAGAMOS EN REACT TIENEN QUE ACTUAR COMO FUNCIONES PURAS Y NO MODIFICAR SUS PROPIEDADES
 
-class Title extends Component{
+/*Primer componente con state: Las props que le pasamos a un componente cambian su renderizado y es muy util para cambiar 
+el comportamiento de un componente pero se necesita saber como se puede hacer para que sean
+ reactivos que reaccionen a los cambios para ello se necesita conocer y usar el state*/
+class Contador extends Component{
+  constructor(){ //Para añadir el state a nuestro componente hay que utilizar el método constructor de la clase 
+    super()        //y se llama el método super() que ejecutará el constructor de la clase que extendemos, de Component en este caso.
+    this.state={contador:1} //Aquí se inicia el state del componente para ello se usa this que es el contexto del componente,
+                            // apuntamos a la propiedad state y le pasamos un objeto con el estado inicial del componente
+   //setInterval(()=> this.state.contador=this.state.contador+1, 1000) //Ejecuta una función que incrementa el contador cada segundo que pasa
+   //No se debe actualizar directamente el estado del componente sino con setState, porque React  optimiza cuando debe hacer los cambios en el 
+   //árbol de elementos del navegador para ello tiene una cola en la que va priorizando el trabajo para reflejar los cambios de nuestros componentes.                    
+   //Hay que usar setState que preguntará cuando es el momento para actualizar el componente
+   setInterval(()=> {this.setState({contador: this.state.contador+1})
+   }, 1000)
+  }
+
+  render(){ //Se actualiza el método render eliminando la constante
+    //const contador=0
+    //return <span>{contador}</span>
+    return <span>{this.state.contador}</span> //se usa el state para recuperar el valor del contador
+  }
+}
+/**********Fin Primer componente con state************/
+
+class Title extends Component{ 
   render(){ //renderiza una etiqueta h1
-    return <h1>{this.props.text}</h1>
+    return <h1>{this.props.text}</h1> 
   }
 }
 //Valor por defecto para las props cuando no se le envía datos
@@ -88,6 +112,8 @@ function App() {
         >
           Learn React
         </a>
+        <h1>Primer componente con State</h1>
+        <Contador/>
       </header>
     </div>
   );
